@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFDA"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -22,7 +23,9 @@
         android:id="@+id/btNav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#FFFFDA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/botton_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
