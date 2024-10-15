@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GalleryRepository {
     Context context;
@@ -34,7 +35,7 @@ public class GalleryRepository {
         String selectionArgs[] = null;
         String sort = MediaStore.Images.Media.DATE_ADDED;
         
-        Cursor cursor = null;0
+        Cursor cursor = null;
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             Bundle queryArgs = new Bundle();
