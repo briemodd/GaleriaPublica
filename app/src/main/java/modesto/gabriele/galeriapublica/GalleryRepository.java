@@ -48,7 +48,7 @@ public class GalleryRepository {
             queryArgs.putInt(ContentResolver.QUERY_ARG_SORT_DIRECTION, ContentResolver.QUERY_SORT_DIRECTION_ASCENDING);
 
             queryArgs.putInt(ContentResolver.QUERY_ARG_LIMIT, limit);
-            queryArgs.putString(ContentResolver.QUERY_ARG_OFFSET, offSet);
+            queryArgs.putString(ContentResolver.QUERY_ARG_OFFSET, String.valueOf(offSet));
 
             cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, queryArgs, null);
 

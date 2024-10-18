@@ -4,7 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.paging.ListenableFuturePagingSource;
 import androidx.paging.PagingSource;
 
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 import javax.annotation.Nullable;
 
@@ -25,7 +32,7 @@ public class GalleryPagingSource {
 
     @Nullable
     @Override
-    public ListenableFuture<LoadResult<Integer, ImageData>>loadFuture(@NonNull LoadParams<Integer> loadParams) {
+    public ListenableFuture<PagingSource.LoadResult<Integer, ImageData>> loadFuture(@NonNull PagingSource.LoadParams<Integer> loadParams) {
         Integer nextPageNumber = loadParams.getKey();
         if (nextPageNumber == null) {
             nextPageNumber = 1;
@@ -44,9 +51,9 @@ public class GalleryPagingSource {
         Integer finalOffSet = offSet;
         Integer finalNextPageNumber = nextPageNumber;
 
-        ListenableFuture<LoadResult<Integer, ImageData>> lf = service.submit(new Callable<LoadResult<Integer, ImageData>>() {
+        ListenableFuture<PagingSource.LoadResult<Integer, ImageData>> lf = service.submit(new Callable<PagingSource.LoadResult<Integer, ImageData>>() {
             @Override
-            public LoadResult<Integer, ImageData> call() {
+            public PagingSource.LoadResult<Integer, ImageData> call() {
                 List<ImageData> imageDataList = null;
                 try {
                     imageDataList = galleryRepository.loadImageData(loadParams.getLoadSize(), finalOffSet);
@@ -54,9 +61,9 @@ public class GalleryPagingSource {
                     if(imageDataList.size() >= loadParams.getLoadSize()) {
                         nextKey = finalNextPageNumber + 1;
                     }
-                    return new LoadResult.Page<Integer, ImageData>(imageDataList, null, nextKey);
+                    return new PagingSource.LoadResult.Page<Integer, ImageData>(imageDataList, null, nextKey);
                 } catch (FileNotFoundException e) {
-                    return new LoadResult.Error<>(e);
+                    return new PagingSource.LoadResult.Error<>(e);
                 }
             }
         });
