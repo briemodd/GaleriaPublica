@@ -3,6 +3,7 @@ package modesto.gabriele.galeriapublica;
 import androidx.annotation.NonNull;
 import androidx.paging.ListenableFuturePagingSource;
 import androidx.paging.PagingSource;
+import androidx.paging.PagingState;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -15,20 +16,15 @@ import java.util.concurrent.Executors;
 
 import javax.annotation.Nullable;
 
-public class GalleryPagingSource {
-    ListenableFuturePagingSource<Integer, ImageData>
+public class GalleryPagingSource extends ListenableFuturePagingSource<Integer, ImageData> {
 
     GalleryRepository galleryRepository;
-
+    Integer initialLoadSize = 0;
     public GalleryPagingSource(GalleryRepository galleryRepository) {
         this.galleryRepository = galleryRepository;
     }
 
-    @Nullable
-    @Override
-    public Integer getRefreshKey(@NonNull PagingSource<Integer, ImageData> pagingSource) {
-        return null;
-    }
+
 
     @Nullable
     @Override
@@ -68,5 +64,11 @@ public class GalleryPagingSource {
             }
         });
         return lf;
+    }
+
+    @androidx.annotation.Nullable
+    @Override
+    public Integer getRefreshKey(@NonNull PagingState<Integer, ImageData> pagingState) {
+        return null;
     }
 }

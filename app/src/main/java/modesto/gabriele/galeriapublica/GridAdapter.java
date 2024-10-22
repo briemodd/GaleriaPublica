@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import java.text.SimpleDateFormat;
 
-public class GridAdapter<ImageView> extends PagingDataAdapter<ImageData, MyViewHolder> {
+public class GridAdapter extends PagingDataAdapter<ImageData, MyViewHolder> {
 
     public GridAdapter(@NonNull DiffUtil.ItemCallback<ImageData> diffCallBack) {
         super(diffCallBack);
@@ -29,18 +30,6 @@ public class GridAdapter<ImageView> extends PagingDataAdapter<ImageData, MyViewH
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ImageData imageData = getItem(position);
-
-        TextView tvName = holder.itemView.findViewById(R.id.tvName);
-
-        tvName.setText(imageData.fileName);
-
-        TextView tvDate = holder.itemView.findViewById(R.id.tvDate);
-
-        tvDate.setText("Data: " + new SimpleDateFormat("HH:mm dd/MM/yyyy").format(imageData.date));
-
-        TextView tvSize = holder.itemView.findViewById(R.id.tvSize);
-
-        tvSize.setText("Tamanho: " + String.valueOf(imageData.size));
 
         Bitmap thumb = imageData.thumb;
 

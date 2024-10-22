@@ -72,7 +72,7 @@ public class GridViewFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.grid_view_fragment, container, false);
+        view = inflater.inflate(R.layout.fragment_grid_view, container, false);
         return view;
     }
 
@@ -80,17 +80,17 @@ public class GridViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-        ListAdapter listAdapter = new ListAdapter(new ImageDataComparator());
+        GridAdapter gridAdapter = new GridAdapter(new ImageDataComparator());
         LiveData<PagingData<ImageData>> liveData = mViewModel.getPageLv();
         liveData.observe(getViewLifecycleOwner(), new Observer<PagingData<ImageData>>() {
             @Override
             public void onChanged(PagingData<ImageData> imageDataPagingData) {
-                listAdapter.submitData(getViewLifecycleOwner().getLifecycle(), objectPagingData);
+                gridAdapter.submitData(getViewLifecycleOwner().getLifecycle(), imageDataPagingData);
             }
         });
 
         RecyclerView rvGallery = (RecyclerView) view.findViewById(R.id.rvGrid);
         rvGallery.setAdapter(gridAdapter);
-        rvGallery.setLayoutManager(new GridViewFragment(getContext()));
+        rvGallery.setLayoutManager(new GridLayoutManager(getContext(), 4));
     }
 }

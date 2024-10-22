@@ -68,7 +68,7 @@ public class ListViewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.id.list_view_fragment, container, false);
+        view = inflater.inflate(R.id.fragment_list_view, container, false);
         return view;
     }
 
@@ -81,7 +81,7 @@ public class ListViewFragment extends Fragment {
         liveData.observe(getViewLifecycleOwner(), new Observer<PagingData<ImageData>>() {
             @Override
             public void onChanged(PagingData<ImageData> imageDataPagingData) {
-                listAdapter.submitData(getViewLifecycleOwner().getLifecycle(), objectPagingData);
+                listAdapter.submitData(getViewLifecycleOwner().getLifecycle(), imageDataPagingData);
             }
         });
 
