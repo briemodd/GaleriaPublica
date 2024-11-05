@@ -54,7 +54,7 @@ public class GalleryRepository {
 
         }
         else {
-            cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, selection, selectionArgs, sort + "ASC + LIMIT" + String.valueOf(limit) + "OFFSET" + String.valueOf(offSet));
+            cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, selection, selectionArgs, sort + " ASC + LIMIT " + String.valueOf(limit) + " OFFSET " + String.valueOf(offSet));
         }
 
         int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
@@ -62,7 +62,7 @@ public class GalleryRepository {
         int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED);
         int sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE);
 
-        while (cursor.moveToLast()) {
+        while (cursor.moveToNext()) {
             long id = cursor.getLong(idColumn);
             Uri contentUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
             String name = cursor.getString(nameColumn);

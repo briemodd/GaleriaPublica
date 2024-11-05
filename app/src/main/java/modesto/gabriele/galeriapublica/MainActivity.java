@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    static int RESULT_REQUEST_PERMISSION = ;
+    static int RESULT_REQUEST_PERMISSION = 2;
 
     BottomNavigationView bottomNavigationView;
 
@@ -49,15 +49,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 vm.setNavigationOpSelected(item.getItemId());
-                switch (item.getItemId()) {
-                    case R.id.gridViewOp:
-                        GridViewFragment gridViewFragment= GridViewFragment.newInstance();
-                        setFragment(gridViewFragment);
-                        break;
-                    case R.id.listViewOp:
-                        ListViewFragment listViewFragment = ListViewFragment.newInstance();
-                        setFragment(listViewFragment);
-                        break;
+                if (item.getItemId() == R.id.gridViewOp) {
+                    GridViewFragment gridViewFragment = GridViewFragment.newInstance();
+                    setFragment(gridViewFragment);
+                } else if (item.getItemId() == R.id.listViewOp) {
+                    ListViewFragment listViewFragment = ListViewFragment.newInstance();
+                    setFragment(listViewFragment);
                 }
                 return true;
             }
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    @Override
+
     public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 

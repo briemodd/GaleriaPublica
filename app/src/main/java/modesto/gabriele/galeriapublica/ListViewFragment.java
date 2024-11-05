@@ -42,14 +42,7 @@ public class ListViewFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListViewFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static ListViewFragment newInstance() {
         return new ListViewFragment();
@@ -68,7 +61,7 @@ public class ListViewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.id.fragment_list_view, container, false);
+        view = inflater.inflate(R.layout.fragment_list_view, container, false);
         return view;
     }
 
