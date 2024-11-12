@@ -28,6 +28,7 @@ public class GalleryRepository {
         int w = (int)context.getResources().getDimension(R.dimen.itemWidth);
         int h = (int)context.getResources().getDimension(R.dimen.itemHeight);
 
+        //criando as "caixas" da galeria meio como sql
         String[] projection = new String[] {MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME,
                 MediaStore.Images.Media.DATE_ADDED,
                 MediaStore.Images.Media.SIZE};
@@ -56,7 +57,7 @@ public class GalleryRepository {
         else {
             cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, selection, selectionArgs, sort + " ASC + LIMIT " + String.valueOf(limit) + " OFFSET " + String.valueOf(offSet));
         }
-
+        //coloca os nomes das "caixas"
         int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
         int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
         int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED);

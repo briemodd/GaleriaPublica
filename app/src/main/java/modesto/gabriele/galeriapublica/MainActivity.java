@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
+    //pedindo permissao para leitura do armazenamento publico
     @Override
     protected void onResume() {
         super.onResume();
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         checkForPermissions(permissions);
     }
-
+    //checando permissoes
     private void checkForPermissions(List<String> permissions) {
         List<String> permissionsNotGranted = new ArrayList<>();
 
@@ -85,10 +85,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        //o que acontece caso o usuario permitir
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(permissionsNotGranted.size() > 0) {
                 requestPermissions(permissionsNotGranted.toArray(new String[permissionsNotGranted.size()]), RESULT_REQUEST_PERMISSION);
-            }
+            } //o que acontece se nao
             else {
                 MainViewModel vm = new ViewModelProvider(this).get(MainViewModel.class);
                 int navigationOpSelected = vm.getNavigationOpSelected();
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //ve se a permissao foi aceita ou nao
     private boolean hasPermission(String permission) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return ActivityCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_GRANTED;
